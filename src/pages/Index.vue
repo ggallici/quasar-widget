@@ -1,37 +1,50 @@
 <template>
   <q-page>
-    <!-- 
-      :row-height="110" Determina en 110 pixeles el alto de las filas. Esto sirve porque cuando agrandas agrandas por columnas
-      (que son 12 por default) y por filas (que son infinitas y por lo tanto tenes que decirle cuanto miden).
-      En 110 de alto y 12 columnas de ancho se logran widgets bastante cuadrados
-    -->
-    <GridLayout :layout.sync="widgets" :row-height="110" is-draggable is-resizable responsive>
-      <GridItem v-bind="widgets[0]" class="bordeRojo">
-        <div class="fit row no-wrap">
-          <div class="col bordeAzul">
-            <v-chart :options="chartOption1" autoresize style="width: 100%; height: 100%;"/>
-          </div>
-          <div class="col bordeAzul">
+    <GridLayout :layout.sync="widgets" :row-height="110" responsive class="bordeVioleta">
+
+      <GridItem v-bind="widgets[0]">
+        <Widget>
+          <template slot="seccion-0">
+            <v-chart :options="chartOption1" autoresize style="width: 100%; height: 100%;" />
+          </template>
+          <template slot="seccion-1">
             <q-table title="Treats" :data="tableData" :columns="tableColumns" row-key="name" style="height: 100%;"/>
-          </div>
-        </div>
+          </template>
+        </Widget>
       </GridItem>
-      <GridItem v-bind="widgets[1]" class="bordeRojo">
-        <div class="fit column no-wrap">
-          <div class="col bordeAzul">
-            <v-chart :options="chartOption2" autoresize style="width: 100%; height: 100%;"/>
-          </div>
-          <div class="col bordeAzul">
+
+      <GridItem v-bind="widgets[1]">
+        <Widget orientacion="vertical">
+          <template slot="seccion-0">
+            <v-chart :options="chartOption2" autoresize style="width: 100%; height: 100%;" />
+          </template>
+          <template slot="seccion-1">
             <q-table title="Treats" :data="tableData" :columns="tableColumns" row-key="name" style="height: 100%;"/>
-          </div>
-        </div>
+          </template>
+        </Widget>
       </GridItem>
+
+      <GridItem v-bind="widgets[2]">
+        <Widget orientacion="vertical" :tamaniosSecciones="[6, 3, 3]">
+          <template slot="seccion-0">
+            <v-chart :options="chartOption2" autoresize style="width: 100%; height: 100%;" />
+          </template>
+          <template slot="seccion-1">
+            <div>seccion 1</div>
+          </template>
+          <template slot="seccion-2">
+            <div>seccion 2</div>
+          </template>
+        </Widget>
+      </GridItem>
+      
     </GridLayout>
   </q-page>
 </template>
 
 <script>
 import { GridLayout, GridItem } from "vue-grid-layout";
+import Widget from "components/Widget";
 import ECharts from "vue-echarts";
 import "echarts/lib/chart/pie";
 import "echarts/lib/chart/bar";
@@ -251,16 +264,13 @@ const tableData = [
 
 export default {
   name: "PageIndex",
-  components: { GridLayout, GridItem, "v-chart": ECharts },
+  components: { GridLayout, GridItem, Widget, "v-chart": ECharts },
   data: () => ({ widgets, chartOption1, chartOption2, tableColumns, tableData })
 };
 </script>
 
 <style scoped>
-.bordeRojo {
-  border: 5px solid red;
-}
-.bordeAzul {
-  border: solid blue;
+.bordeVioleta {
+  border: 5px solid violet;
 }
 </style>
