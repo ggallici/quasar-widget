@@ -11,8 +11,8 @@ export default {
   props: {
     orientacion: {
       type: String,
-      default: "horizontal",
-      validator: valor => ["horizontal", "vertical"].includes(valor)
+      default: "automatica",
+      validator: valor => ["automatica", "horizontal", "vertical"].includes(valor)
     },
     tamaniosSecciones: {
       type: Array,
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     getFlexOrientationClass() {
-      return this.orientacion === "vertical" ? "column" : "row";
+      return this.orientacion === "vertical" || (this.orientacion === "automatica" && this.$q.screen.lt.sm) ? "column" : "row";
     },
     getFlexColClass(tamanio) {
       return tamanio ? `col-${tamanio}` : "col";

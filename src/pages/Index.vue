@@ -13,7 +13,7 @@
       </GridItem>
 
       <GridItem v-bind="widgets[1]">
-        <Widget orientacion="vertical">
+        <Widget orientacion="horizontal">
           <template slot="seccion-0">
             <v-chart :options="chartOption2" autoresize style="width: 100%; height: 100%;" />
           </template>
