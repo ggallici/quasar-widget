@@ -1,5 +1,13 @@
 <template>
   <q-page>
+    <GridItem>
+      MENU 1
+    </GridItem>
+    <GridItem>
+      MENU 2
+    </GridItem>
+    <br>
+    <br>
     <GridLayout>
       <GridItem v-bind="widgets[0]">
         <Widget>
