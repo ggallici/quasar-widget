@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <div class="grid-stack backGround">
-      <slot></slot>
-    </div>
+  <div class="grid-stack backGround">
+    <slot></slot>
   </div>
 </template>
 
