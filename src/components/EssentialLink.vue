@@ -4,7 +4,9 @@
     tag="a"
     target="_blank"
     :href="link"
+    class="grid-stack-item" 
   >
+  <!-- SOLO AGREGANDO LA CLASE YA PUEDO DRAGEAR LOS MENUS A LA GRILLA -->
     <q-item-section
       v-if="icon"
       avatar

@@ -1,9 +1,10 @@
 <template>
   <q-page>
-    <GridItem>
+    <GridItem style="border: solid 3px green">
       MENU 1
     </GridItem>
-    <GridItem>
+    <br>
+    <GridItem style="border: solid 3px green">
       MENU 2
     </GridItem>
     <br>
