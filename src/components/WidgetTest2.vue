@@ -38,7 +38,7 @@ const chartOption2 = {
 
 export default {
   components: { Widget, "v-chart": ECharts },
-  data: () => ({ chartOption1 })
+  data: () => ({ chartOption2 })
 };
 </script>
 

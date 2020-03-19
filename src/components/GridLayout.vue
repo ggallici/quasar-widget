@@ -14,13 +14,21 @@ export default {
       resizable: {
         handles: 'se, sw'
       },
-      acceptWidgets: '.AAA'
+      acceptWidgets: true
     });
 
     $('.AAA').draggable({
       helper: 'clone',
       revert: 'invalid',
-      //scroll: true
+      start: function( event, ui ) {
+        console.log("entro al evento start")
+      },
+      stop: function( event, ui ) {
+        console.log("entro al evento stop")
+        console.log("posision: " + JSON.stringify(ui.position))
+        console.log("offset: " + JSON.stringify(ui.offset))
+        //console.log("offset: " + JSON.stringify(ui.helper))
+      }
     });
   }
 };

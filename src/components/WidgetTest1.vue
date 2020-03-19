@@ -4,7 +4,7 @@
       <v-chart :options="chartOption1" autoresize style="width: 100%; height: 100%;" />
     </template>
     <template slot="seccion-1">
-      <q-table title="Treats" :data="tableData" :columns="tableColumns" :row-key="name" style="height: 100%;" />
+      <q-table title="Treats" :data="tableData" :columns="tableColumns" row-key="name" style="height: 100%;" />
     </template>
   </Widget>
 </template>

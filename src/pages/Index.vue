@@ -1,13 +1,8 @@
 <template>
   <q-page>
     <GridLayout>
-      <GridItem v-bind="widgets[0]">
-      </GridItem>
-
-      <GridItem v-bind="widgets[1]">
-      </GridItem>
-
-      <GridItem v-bind="widgets[2]">
+      <GridItem v-for="item in itemsAgregados" :key="item.key" v-bind="item.gridItem">
+        <component :is="item.widget.component" v-bind="item.widget.props"></component>
       </GridItem>
     </GridLayout>
   </q-page>
@@ -16,19 +11,18 @@
 <script>
 import GridItem from "components/GridItem";
 import GridLayout from "components/GridLayout";
-
-const widgets = [
-  { x: 0, y: 0, w: 4, h: 1 },
-  { x: 2, y: 0, w: 2, h: 2 },
-  { x: 4, y: 0, w: 2, h: 2 },
-  { x: 6, y: 0, w: 2, h: 2 },
-  { x: 8, y: 0, w: 2, h: 2 },
-  { x: 10, y: 0, w: 2, h: 2 }
-];
+import WidgetTest1 from "components/WidgetTest1";
+import WidgetTest2 from "components/WidgetTest2";
+import { mapState } from "vuex"
 
 export default {
   name: "PageIndex",
-  components: { GridLayout, GridItem },
-  data: () => ({ widgets })
+  components: { GridLayout, GridItem, WidgetTest1, WidgetTest2 },
+  computed: {
+    ...mapState("example", ["items"]),
+    itemsAgregados() {
+      return this.items.filter(it => it.agregado)
+    }
+  }
 };
 </script>
