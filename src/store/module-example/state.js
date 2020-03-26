@@ -1,7 +1,6 @@
 export default () => ({
   items: [
     {
-      key: 1,
       agregado: false,
       menuItem: {
         title: "Docs",
@@ -15,7 +14,6 @@ export default () => ({
       }
     },
     {
-      key: 2,
       agregado: false,
       menuItem: {
         title: "Github",
