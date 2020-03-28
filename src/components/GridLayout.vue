@@ -24,6 +24,7 @@ export default {
     ...mapActions("example", ["setMenuItemDraggeado"]),
     onDragLeave(e) {
       if(this.menuItemDraggeado) {
+        e.preventDefault();
         e.target.classList.remove("drag-enter");
       }
     },
