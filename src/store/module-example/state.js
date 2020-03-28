@@ -1,4 +1,5 @@
 export default () => ({
+  menuItemDraggeado: null,
   items: [
     {
       agregado: false,

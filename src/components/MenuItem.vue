@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable>
+  <q-item clickable draggable @dragstart="onDragStart" @dragend="onDragEnd">
 
     <q-item-section avatar>
       <q-icon :name="icon" />
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   props: {
     title: {
@@ -27,6 +29,15 @@ export default {
     icon: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    ...mapActions("example", ["setMenuItemDraggeado"]),
+    onDragStart(e) {
+      this.setMenuItemDraggeado({ title: this.title, caption: this.caption, icon: this.icon })
+    },
+    onDragEnd(e) {
+      this.setMenuItemDraggeado(null)
     }
   }
 };
