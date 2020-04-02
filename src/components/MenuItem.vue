@@ -34,7 +34,12 @@ export default {
   methods: {
     ...mapActions("example", ["setMenuItemDraggeado"]),
     onDragStart(e) {
-      this.setMenuItemDraggeado({ title: this.title, caption: this.caption, icon: this.icon })
+      const datos = { title: this.title, caption: this.caption, icon: this.icon }
+      const posicionRelativaDelMouse = {
+        left: e.pageX - e.target.getBoundingClientRect().left,
+        top: e.pageY - e.target.getBoundingClientRect().top
+      }
+      this.setMenuItemDraggeado({ datos, posicionRelativaDelMouse })
     },
     onDragEnd(e) {
       this.setMenuItemDraggeado(null)

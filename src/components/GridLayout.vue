@@ -9,8 +9,9 @@ import "gridstack/dist/gridstack.all";
 import { mapState, mapActions } from "vuex"
 
 export default {
+  data: () => ({ grilla: null }),
   mounted() {
-    GridStack.init({
+    this.grilla = GridStack.init({
       animate: true,
       resizable: {
         handles: "se, sw"
@@ -18,10 +19,9 @@ export default {
     });
   },
   computed: {
-    ...mapState("example", ["menuItemDraggeado", "items"])
+    ...mapState("example", ["menuItemDraggeado"])
   },
   methods: {
-    ...mapActions("example", ["setMenuItemDraggeado"]),
     onDragLeave(e) {
       if(this.menuItemDraggeado) {
         e.preventDefault();
@@ -38,9 +38,29 @@ export default {
       if(this.menuItemDraggeado) {
         e.preventDefault();
         e.target.classList.remove("drag-enter");
-        console.log(JSON.stringify(this.menuItemDraggeado));
-        const itemDraggeado = this.items.find(it => it.menuItem.title === this.menuItemDraggeado.title)
-        console.log(JSON.stringify(itemDraggeado))
+
+        /*
+        ESTO FUNCIONA PERO NO SE DONDE USARLO AUN
+
+        var leftGrilla = e.pageX - e.target.getBoundingClientRect().left;
+        var topGrilla = e.pageY - e.target.getBoundingClientRect().top;
+
+        console.log({ leftGrilla, topGrilla })
+
+        var leftMenu = this.menuItemDraggeado.posicionRelativaDelMouse.left
+        var topMenu = this.menuItemDraggeado.posicionRelativaDelMouse.top
+
+        console.log({ leftMenu, topMenu })
+
+        var left = Math.max(0, leftGrilla - leftMenu) //EL MAX NO SE SI VA
+        var top = Math.max(0, topGrilla - topMenu)
+
+        console.log({ left, top })
+
+        const celda = this.grilla.getCellFromPixel({ left, top })
+
+        console.log(celda)
+        */
       }
     }
   }
