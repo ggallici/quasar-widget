@@ -18,6 +18,10 @@ import { mapActions } from "vuex"
 
 export default {
   props: {
+    id: {
+      type: Number,
+      required: true
+    },
     title: {
       type: String,
       required: true
@@ -39,7 +43,7 @@ export default {
         left: e.pageX - e.target.getBoundingClientRect().left,
         top: e.pageY - e.target.getBoundingClientRect().top
       }
-      this.setMenuItemDraggeado({ datos, posicionRelativaDelMouse })
+      this.setMenuItemDraggeado({ id: this.id, datos, posicionRelativaDelMouse })
     },
     onDragEnd(e) {
       this.setMenuItemDraggeado(null)

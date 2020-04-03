@@ -1,5 +1,5 @@
 <template>
-  <div class="grid-stack-item" :data-gs-x=x :data-gs-y=y :data-gs-width=w :data-gs-height=h>
+  <div class="grid-stack-item" :data-gs-id="id" :data-gs-x="x" :data-gs-y="y" :data-gs-width="w" :data-gs-height="h">
     <div class="grid-stack-item-content">
       <slot></slot>
     </div>
@@ -9,6 +9,10 @@
 <script>
 export default {
   props: {
+    id: {
+      type: Number,
+      required: true
+    },
     x: {
       type: Number,
       required: true

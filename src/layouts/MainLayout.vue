@@ -13,7 +13,7 @@
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered content-class="bg-grey-1">
       <q-list>
         <q-item-label header class="text-grey-8">Consultas disponibles</q-item-label>
-        <MenuItem v-for="(item, index) in itemsNoAgregados" :key="index" v-bind="item.menuItem" />
+        <MenuItem v-for="item in itemsNoAgregados" :key="item.id" :id="item.id" v-bind="item.menuItem" />
       </q-list>
     </q-drawer>
 

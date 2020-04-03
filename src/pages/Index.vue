@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <GridLayout>
-      <GridItem v-for="(item, index) in itemsAgregados" :key="index" v-bind="item.gridItem">
+      <GridItem v-for="item in itemsAgregados" :key="item.id" :id="item.id" v-bind="item.gridItem">
         <component :is="item.widget.component" v-bind="item.widget.props"></component>
       </GridItem>
     </GridLayout>
