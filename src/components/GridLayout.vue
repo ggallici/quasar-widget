@@ -19,37 +19,20 @@ export default {
     });
     //Fuerzo bindeo desde el DOM hacia el State de Vue
     this.grilla.on("change", (event, gridStackNodes) => {
-      //TODO: Pasar esto al store
-      gridStackNodes.forEach(gridStackNode => {
-        
-        let item = this.items.find(it => it.id === parseInt(gridStackNode.el.getAttribute("data-gs-id")));
-
-        item.gridItem.x = parseInt(gridStackNode.el.getAttribute("data-gs-x"));
-        item.gridItem.y = parseInt(gridStackNode.el.getAttribute("data-gs-y"));
-        item.gridItem.w = parseInt(gridStackNode.el.getAttribute("data-gs-width"));
-        item.gridItem.h = parseInt(gridStackNode.el.getAttribute("data-gs-height"));
-      });
+      this.refrescarItemsDelStoreCon(gridStackNodes);
     });
+    //Fuerzo bindeo desde el State de Vue hacia el DOM
+    this.$store.watch(
+      (state) => state.example.items,
+      { deep: true },
+      () => { this.refrescarItemsDeLaGrilla(this.grilla) }
+    );
   },
   computed: {
-    ...mapState("example", ["menuItemDraggeado", "items"])
-  },
-  //Fuerzo bindeo desde el State de Vue hacia el DOM (No funciona para nuevos widgets)
-  watch: {
-    items: {
-      deep: true,
-      handler() {
-        //TODO: Pasar esto al store
-        this.grilla.engine.nodes.forEach(gridStackNode => {
-          
-          const item = this.items.find(it => it.id === parseInt(gridStackNode.el.getAttribute("data-gs-id")));
-
-          this.grilla.update(gridStackNode.el, item.gridItem.x, item.gridItem.y, item.gridItem.w, item.gridItem.h);
-        });
-      }
-    }
+    ...mapState("example", ["menuItemDraggeado"])
   },
   methods: {
+    ...mapActions("example", ["refrescarItemsDelStoreCon", "refrescarItemsDeLaGrilla"]),
     onDragLeave(e) {
       if(this.menuItemDraggeado) {
         e.preventDefault();
