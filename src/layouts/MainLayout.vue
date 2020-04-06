@@ -13,7 +13,7 @@
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered content-class="bg-grey-1">
       <q-list>
         <q-item-label header class="text-grey-8">Consultas disponibles</q-item-label>
-        <MenuItem v-for="item in itemsNoAgregados" :key="item.id" :id="item.id" v-bind="item.menuItem" />
+        <DraggableMenuItem v-for="item in itemsNoAgregados" :key="item.id" v-bind="item" />
       </q-list>
     </q-drawer>
 
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import MenuItem from "components/MenuItem";
+import DraggableMenuItem from "components/DraggableMenuItem";
 import { mapState } from "vuex"
 
 export default {
   name: "MainLayout",
-  components: { MenuItem },
+  components: { DraggableMenuItem },
   data: () => ({ leftDrawerOpen: false }),
   computed: {
     ...mapState("example", ["items"]),

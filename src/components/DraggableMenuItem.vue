@@ -2,12 +2,12 @@
   <q-item clickable draggable @dragstart="onDragStart" @dragend="onDragEnd">
 
     <q-item-section avatar>
-      <q-icon :name="icon" />
+      <q-icon :name="menuItem.icon" />
     </q-item-section>
 
     <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption>{{ caption }}</q-item-label>
+      <q-item-label>{{ menuItem.title }}</q-item-label>
+      <q-item-label caption>{{ menuItem.caption }}</q-item-label>
     </q-item-section>
 
   </q-item>
@@ -22,28 +22,24 @@ export default {
       type: Number,
       required: true
     },
-    title: {
-      type: String,
+    menuItem: {
+      type: Object,
       required: true
     },
-    caption: {
-      type: String,
-      required: true
-    },
-    icon: {
-      type: String,
+    gridItem: {
+      type: Object,
       required: true
     }
   },
   methods: {
     ...mapActions("example", ["setMenuItemDraggeado"]),
     onDragStart(e) {
-      const datos = { title: this.title, caption: this.caption, icon: this.icon }
+      const defaultSize = { w: this.gridItem.w, h: this.gridItem.h }
       const posicionRelativaDelMouse = {
         left: e.pageX - e.target.getBoundingClientRect().left,
         top: e.pageY - e.target.getBoundingClientRect().top
       }
-      this.setMenuItemDraggeado({ id: this.id, datos, posicionRelativaDelMouse })
+      this.setMenuItemDraggeado({ id: this.id, defaultSize, posicionRelativaDelMouse })
     },
     onDragEnd(e) {
       this.setMenuItemDraggeado(null)
