@@ -57,7 +57,7 @@ export default {
           widget: {
             id: this.menuItemDraggeado.id,
             celda: this.getCellFromMousePosition(e),
-            tamanio: this.menuItemDraggeado.defaultSize
+            tamanioDefault: this.menuItemDraggeado.tamanioDefault
           }
         });
       }

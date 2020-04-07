@@ -34,12 +34,12 @@ export default {
   methods: {
     ...mapActions("example", ["setMenuItemDraggeado"]),
     onDragStart(e) {
-      const defaultSize = { w: this.gridItem.w, h: this.gridItem.h }
+      const tamanioDefault = { w: this.gridItem.w, h: this.gridItem.h }
       const posicionRelativaDelMouse = {
         left: e.pageX - e.target.getBoundingClientRect().left,
         top: e.pageY - e.target.getBoundingClientRect().top
       }
-      this.setMenuItemDraggeado({ id: this.id, defaultSize, posicionRelativaDelMouse })
+      this.setMenuItemDraggeado({ id: this.id, tamanioDefault, posicionRelativaDelMouse })
     },
     onDragEnd(e) {
       this.setMenuItemDraggeado(null)
