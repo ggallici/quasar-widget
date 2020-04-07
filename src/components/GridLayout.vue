@@ -21,15 +21,16 @@ export default {
     this.grilla.on("change", (event, gridStackNodes) => {
       this.refrescarItemsDelStoreCon(gridStackNodes);
     });
-    //Fuerzo bindeo desde el State de Vue hacia el DOM
-    this.$store.watch(
-      (state) => state.example.items,
-      { deep: true },
-      () => { this.refrescarItemsDeLaGrilla(this.grilla) }
-    );
+  },
+  //Fuerzo bindeo desde el State de Vue hacia el DOM
+  watcher: {
+    items: {
+      depp: true,
+      handler() { this.refrescarItemsDeLaGrilla(this.grilla); }
+    }
   },
   computed: {
-    ...mapState("example", ["menuItemDraggeado"])
+    ...mapState("example", ["menuItemDraggeado", "items"])
   },
   methods: {
     ...mapActions("example", ["refrescarItemsDelStoreCon", "refrescarItemsDeLaGrilla"]),
