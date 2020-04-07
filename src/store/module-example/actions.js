@@ -23,3 +23,15 @@ export const refrescarItemsDelStoreCon = ({ commit }, gridStackNodes) => {
         });
     });
 }
+
+export const agregarWidgetEnLaGrilla = ({ commit }, { grilla, widget }) => {
+    commit('FIND_ITEM_BY_ID_AND_SET_AGREGADO_AND_XY', { id: widget.id, celda: widget.celda });
+    setTimeout(() => {
+        const itemParaEliminar = document.querySelector(`[data-gs-id="${widget.id}"]`);
+        const itemEliminado = grilla.el.removeChild(itemParaEliminar);
+        grilla.addWidget(
+            itemEliminado,
+            ...Object.values(widget.celda), 
+            ...Object.values(widget.tamanio));
+    });
+}

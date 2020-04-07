@@ -9,7 +9,7 @@ export default () => ({
         caption: "quasar.dev",
         icon: "school"
       },
-      gridItem: { x: 0, y: 0, w: 4, h: 1 },
+      gridItem: { w: 4, h: 1 },
       widget: {
         component: "WidgetTest1",
         props: { }
@@ -23,7 +23,7 @@ export default () => ({
         caption: "github.com/quasarframework",
         icon: "code"
       },
-      gridItem: { x: 2, y: 0, w: 2, h: 2 },
+      gridItem: { w: 2, h: 2 },
       widget: {
         component: "WidgetTest2"
       }

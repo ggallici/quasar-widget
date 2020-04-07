@@ -13,6 +13,7 @@ export default {
   mounted() {
     this.grilla = GridStack.init({
       animate: true,
+      float: true,
       resizable: {
         handles: "se, sw"
       }
@@ -33,7 +34,7 @@ export default {
     ...mapState("example", ["menuItemDraggeado", "items"])
   },
   methods: {
-    ...mapActions("example", ["refrescarItemsDelStoreCon", "refrescarItemsDeLaGrilla"]),
+    ...mapActions("example", ["refrescarItemsDelStoreCon", "refrescarItemsDeLaGrilla", "agregarWidgetEnLaGrilla"]),
     onDragLeave(e) {
       if(this.menuItemDraggeado) {
         e.preventDefault();
@@ -51,29 +52,28 @@ export default {
         e.preventDefault();
         e.target.classList.remove("drag-enter");
 
-        /*
-        ESTO FUNCIONA PERO NO SE DONDE USARLO AUN
-
-        var leftGrilla = e.pageX - e.target.getBoundingClientRect().left;
-        var topGrilla = e.pageY - e.target.getBoundingClientRect().top;
-
-        console.log({ leftGrilla, topGrilla })
-
-        var leftMenu = this.menuItemDraggeado.posicionRelativaDelMouse.left
-        var topMenu = this.menuItemDraggeado.posicionRelativaDelMouse.top
-
-        console.log({ leftMenu, topMenu })
-
-        var left = Math.max(0, leftGrilla - leftMenu) //EL MAX NO SE SI VA
-        var top = Math.max(0, topGrilla - topMenu)
-
-        console.log({ left, top })
-
-        const celda = this.grilla.getCellFromPixel({ left, top })
-
-        console.log(celda)
-        */
+        this.agregarWidgetEnLaGrilla({
+          grilla: this.grilla,
+          widget: {
+            id: this.menuItemDraggeado.id,
+            celda: this.getCellFromMousePosition(e),
+            tamanio: this.menuItemDraggeado.defaultSize
+          }
+        });
       }
+    },
+    getCellFromMousePosition(e) {
+      const leftGrilla = e.pageX - e.target.getBoundingClientRect().left;
+      const topGrilla = e.pageY - e.target.getBoundingClientRect().top;
+
+      const leftMenu = this.menuItemDraggeado.posicionRelativaDelMouse.left
+      const topMenu = this.menuItemDraggeado.posicionRelativaDelMouse.top
+
+      //TODO: EL MAX NO SE SI VA
+      const left = Math.max(0, leftGrilla - leftMenu)
+      const top = Math.max(0, topGrilla - topMenu)
+
+      return this.grilla.getCellFromPixel({ left, top })
     }
   }
 };
