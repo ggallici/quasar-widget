@@ -66,14 +66,24 @@ export default {
       const leftGrilla = e.pageX - e.target.getBoundingClientRect().left;
       const topGrilla = e.pageY - e.target.getBoundingClientRect().top;
 
-      const leftMenu = this.menuItemDraggeado.posicionRelativaDelMouse.left
-      const topMenu = this.menuItemDraggeado.posicionRelativaDelMouse.top
+      const leftCentroWidget = leftGrilla - this.menuItemDraggeado.posicionRelativaDelMouse.left;
+      const topCentroWidget = topGrilla - this.menuItemDraggeado.posicionRelativaDelMouse.top;
 
-      //TODO: EL MAX NO SE SI VA
-      const left = Math.max(0, leftGrilla - leftMenu)
-      const top = Math.max(0, topGrilla - topMenu)
+      const { widthWidget, heightWidget } = this.getWidgetSizeInPixels(this.menuItemDraggeado.tamanioDefault)
 
-      return this.grilla.getCellFromPixel({ left, top })
+      const leftInicioWidget = leftCentroWidget - widthWidget / 2;
+      const topInicioWidget = topCentroWidget - heightWidget / 2;
+
+      return this.grilla.getCellFromPixel({ left: leftInicioWidget, top: topInicioWidget });
+    },
+    getWidgetSizeInPixels({ w, h }) {
+      const widthSobrante = 2 * 10;
+      const heightFaltante = (h - 1) * this.grilla.verticalMargin();
+
+      const widthWidget = w * this.grilla.cellWidth() - widthSobrante;
+      const heightWidget = h * this.grilla.cellHeight() + heightFaltante;
+
+      return { w: widthWidget, h: heightWidget }
     }
   }
 };

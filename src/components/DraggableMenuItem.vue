@@ -36,8 +36,8 @@ export default {
     onDragStart(e) {
       const tamanioDefault = { w: this.gridItem.w, h: this.gridItem.h }
       const posicionRelativaDelMouse = {
-        left: e.pageX - e.target.getBoundingClientRect().left,
-        top: e.pageY - e.target.getBoundingClientRect().top
+        left: e.pageX - e.target.getBoundingClientRect().left - e.target.offsetWidth / 2,
+        top: e.pageY - e.target.getBoundingClientRect().top - e.target.offsetHeight / 2
       }
       this.setMenuItemDraggeado({ id: this.id, tamanioDefault, posicionRelativaDelMouse })
     },
