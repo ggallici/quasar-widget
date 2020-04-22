@@ -69,7 +69,7 @@ export default {
       const leftCentroWidget = leftGrilla - this.menuItemDraggeado.posicionRelativaDelMouse.left;
       const topCentroWidget = topGrilla - this.menuItemDraggeado.posicionRelativaDelMouse.top;
 
-      const { widthWidget, heightWidget } = this.getWidgetSizeInPixels(this.menuItemDraggeado.tamanioDefault)
+      const { w: widthWidget, h: heightWidget } = this.getWidgetSizeInPixels(this.menuItemDraggeado.tamanioDefault);
 
       const leftInicioWidget = leftCentroWidget - widthWidget / 2;
       const topInicioWidget = topCentroWidget - heightWidget / 2;
