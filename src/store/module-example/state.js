@@ -23,10 +23,62 @@ export default () => ({
         caption: "github.com/quasarframework",
         icon: "code"
       },
-      gridItem: { w: 2, h: 2 },
+      gridItem: { w: 1, h: 3 },
       widget: {
         component: "WidgetTest2"
       }
-    }
+    },
+    {
+      id: 3,
+      agregado: false,
+      menuItem: {
+        title: "Github",
+        caption: "github.com/quasarframework",
+        icon: "code"
+      },
+      gridItem: { w: 3, h: 2 },
+      widget: {
+        component: "WidgetTest2"
+      }
+    },
+    {
+      id: 4,
+      agregado: false,
+      menuItem: {
+        title: "Github",
+        caption: "github.com/quasarframework",
+        icon: "code"
+      },
+      gridItem: { w: 3, h: 3 },
+      widget: {
+        component: "WidgetTest2"
+      }
+    },
+    {
+      id: 5,
+      agregado: false,
+      menuItem: {
+        title: "Github",
+        caption: "github.com/quasarframework",
+        icon: "code"
+      },
+      gridItem: { w: 3, h: 5 },
+      widget: {
+        component: "WidgetTest2"
+      }
+    },
+    {
+      id: 6,
+      agregado: false,
+      menuItem: {
+        title: "Github",
+        caption: "github.com/quasarframework",
+        icon: "code"
+      },
+      gridItem: { w: 7, h: 4 },
+      widget: {
+        component: "WidgetTest1"
+      }
+    },
   ]
 })
