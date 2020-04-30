@@ -32,6 +32,6 @@ export const agregarWidgetEnLaGrilla = ({ commit }, { grilla, widget }) => {
         grilla.addWidget(
             itemEliminado,
             ...Object.values(widget.celda), 
-            ...Object.values(widget.tamanioDefault));
+            ...Object.values(widget.dimensionesDefault));
     });
 }
