@@ -56,34 +56,48 @@ export default {
           grilla: this.grilla,
           widget: {
             id: this.menuItemDraggeado.id,
-            celda: this.getCellFromMousePosition(e),
+            celda: this.getWidgetStartCellFromMousePosition(e, this.menuItemDraggeado.dimensionesDefault),
             dimensionesDefault: this.menuItemDraggeado.dimensionesDefault
           }
         });
       }
     },
-    getCellFromMousePosition(e) {
-      const leftGrilla = e.pageX - e.target.getBoundingClientRect().left;
-      const topGrilla = e.pageY - e.target.getBoundingClientRect().top;
+    getWidgetStartCellFromMousePosition(e, dimensionesWidget) {
+      const pixelCentroWidget = {
+        left: e.pageX - e.target.getBoundingClientRect().left - this.menuItemDraggeado.posicionRelativaDelMouse.left,
+        top: e.pageY - e.target.getBoundingClientRect().top - this.menuItemDraggeado.posicionRelativaDelMouse.top
+      };
+      const celdaCentroWidget = this.grilla.getCellFromPixel(pixelCentroWidget);
+      const pixelCentroCelda = this.getPixelMiddleFromCell(celdaCentroWidget);
 
-      const leftCentroWidget = leftGrilla - this.menuItemDraggeado.posicionRelativaDelMouse.left;
-      const topCentroWidget = topGrilla - this.menuItemDraggeado.posicionRelativaDelMouse.top;
+      const _getEje = (dimensionWidget, coordenadaPixelCentroWidget, ejeCeldaCentroWidget, coordenadaPixelCentroCelda) => {
+        const offSet = dimensionWidget / 2 - (
+          dimensionWidget % 2 === 1
+            ? 0.5
+            : coordenadaPixelCentroWidget < coordenadaPixelCentroCelda ? 0 : 1
+        )
+        return ejeCeldaCentroWidget - offSet;
+      }
 
-      const { w: widthWidget, h: heightWidget } = this.getWidgetSizeInPixels(this.menuItemDraggeado.tamanioDefault);
-
-      const leftInicioWidget = leftCentroWidget - widthWidget / 2;
-      const topInicioWidget = topCentroWidget - heightWidget / 2;
-
-      return this.grilla.getCellFromPixel({ left: leftInicioWidget, top: topInicioWidget });
+      return {
+        x: _getEje(dimensionesWidget.w, pixelCentroWidget.left, celdaCentroWidget.x, pixelCentroCelda.left),
+        y: _getEje(dimensionesWidget.h, pixelCentroWidget.top, celdaCentroWidget.y, pixelCentroCelda.top),
+      }
     },
-    getWidgetSizeInPixels({ w, h }) {
+    getPixelMiddleFromCell({ x, y }) {
+      const left = x * this.grilla.cellWidth() + this.grilla.cellWidth() / 2;
+      const top = y * (this.grilla.cellHeight() + this.grilla.verticalMargin()) + this.grilla.cellHeight() / 2;
+      
+      return { left, top };
+    },
+    getSizeInPixelsFromDimensions({ w, h }) {
       const widthSobrante = 2 * 10;
       const heightFaltante = (h - 1) * this.grilla.verticalMargin();
 
-      const widthWidget = w * this.grilla.cellWidth() - widthSobrante;
-      const heightWidget = h * this.grilla.cellHeight() + heightFaltante;
+      const widthInPixels = w * this.grilla.cellWidth() - widthSobrante;
+      const heightInPixels = h * this.grilla.cellHeight() + heightFaltante;
 
-      return { w: widthWidget, h: heightWidget }
+      return { width: widthInPixels, height: heightInPixels };
     }
   }
 };
